@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="pppApp">
+<head>
+	<meta name="viewport" content="width=device-width">
+	<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+
+	<title>拍拖幾日可以啪啪啪？</title>
+	<style>
+	body{
+		font-family:"Microsoft JhengHei";
+		background-image:url(bg.jpg);
+		background-size:cover;
+	}
+	
+	h1{
+		text-align:center;
+	}	
+	
+	.main-content{
+		display:block;
+		margin:40px auto;
+		width:90%;
+	}
+	
+	@media(min-width:768px){
+		.form-horizontal .control-label{
+			padding-right:6px;
+			padding-left:6px;
+			text-align:left;
+		}
+	}
+	</style>
+	<script>
+	angular.module('pppApp', []).controller('pppController',function(){
+		this.calculate = function(){
+			var Af = parseFloat(this.Af);
+			var Lf = parseFloat(this.Lf);
+			var Lm = parseFloat(this.Lm);
+			var Wm = parseFloat(this.Wm);
+			var Sf = parseInt(this.Sf);
+			
+			if(Af<0 || Af>40 || isNaN(this.Af)){
+				alert("請輸入正確年齡");
+				return;
+			}
+			
+			if(Lf<0 || Lf>10 || isNaN(this.Lf)){
+				alert("請正確輸入女方外貌分數");
+				return;
+			}
+			
+			if(Lm<0 || Lm>10 || isNaN(this.Lm)){
+				alert("請正確輸入男方外貌分數");
+				return;
+			}
+			
+			if(Wm<0 || isNaN(this.Wm)){
+				alert("請正確輸入男方資產");
+			}
+			
+			if(Sf<0 || isNaN(this.Sf)){
+				alert("請正確輸入女方曾有性行為的男性數目");
+			}
+			
+			var days = 10 * (Math.pow(40-Af,2)+Math.pow(Lf,3)) / ( (Math.pow(Lm,2)+Wm ) * Math.pow(Sf + 1,2) );
+			days = days.toFixed(2);
+			
+			alert("你要等 "+days+" 日先有得啪啪啪");
+		}
+	});
+	</script>
+</head>
+<body>
+	<h1>拍拖幾日可以啪啪啪？</h1>
+	<div class="main-content" ng-controller="pppController as ppp">
+		<form class="form-horizontal" ng-submit="ppp.calculate()">
+			<div class="form-group">
+				<label for="Af" class="col-lg-2 col-sm-3 col-xs-12 control-label">女方年齡</label>
+				<div class="col-lg-10 col-sm-9 col-xs-12">
+					<input type="text" class="form-control" id="Af" ng-model="ppp.Af" name="Af" placeholder="(0-40歲)">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Lf" class="col-lg-2 col-sm-3 col-xs-12 control-label">女方外貌</label>
+				<div class="col-lg-10 col-sm-9 col-xs-12">
+					<input type="text" class="form-control" id="Lf" ng-model="ppp.Lf" name="Lf" placeholder="(0-10分)">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Lm" class="col-lg-2 col-sm-3 col-xs-12 control-label">男方外貌</label>
+				<div class="col-lg-10 col-sm-9 col-xs-12">
+					<input type="text" class="form-control" id="Lm" ng-model="ppp.Lm" name="Lm" placeholder="(0-10分)">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Wm" class="col-lg-2 col-sm-3 col-xs-12 control-label">男方資產</label>
+				<div class="col-lg-10 col-sm-9 col-xs-12">
+					<input type="text" class="form-control" id="Wm" ng-model="ppp.Wm" name="Wm" placeholder="每10萬港元為1個單位，不置上限，物業及汽車亦計算在內">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Sf" class="col-lg-2 col-sm-3 col-xs-12 control-label">女方曾有性行為的男性數目</label>
+				<div class="col-lg-10 col-sm-9 col-xs-12">
+					<input type="text" class="form-control" id="Sf" ng-model="ppp.Sf" name="Sf">
+				</div>
+			</div>
+			<p class="text-center"><button type="submit" class="btn btn-primary btn-lg">計算</button></p>
+		</form>
+	</div>
+	<ol>
+		<li>公式來源：<a href="http://m3.hkgolden.com/view.aspx?message=6333232&type=LV&page=1" target="_blank">http://m3.hkgolden.com/view.aspx?message=6333232&type=LV&page=1</a></li>
+		<li>本程式計算結果僅供參考</li>
+	</ol>
+</body>
+</html>
